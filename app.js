@@ -59,7 +59,7 @@ root.append(nav)
 
 
 /*
-necessary functions for the working
+necessary function for the image selection
 */
 
 let image = document.createElement("img")
@@ -102,6 +102,7 @@ const outerDiv = document.createElement("div")
 outerDiv.style.cssText = `
     display : flex;
     justify-content : space-around;
+    flex-flow : row wrap;
 `
 outerDiv.classList.add("outer-div")
 const changeDiv = document.createElement("div")
@@ -165,6 +166,7 @@ let editDiv = document.createElement("div")
 editDiv.style.display = "flex"
 editDiv.style.justifyContent = "flex-start"
 editDiv.style.alignItems = "center"
+editDiv.style.flexFlow = "row wrap"
 let inputDiv = document.createElement("div")
 /*
 adding input field
@@ -224,7 +226,7 @@ radio.name = "blob"
 radio.onchange = (e) => {
     previewDiv.style.backgroundImage = `url("assets/images/blob.png")`
     previewDiv.style.backgroundSize = "100%"
-    previewDiv.style.backgroundPosition = "0px 40px"
+    previewDiv.style.backgroundPosition = "0px 35px"
 }
 label.innerText = "Blob"
 label.style.color = "white"
@@ -244,6 +246,9 @@ label.style.fontSize = "14px"
 radioDiv.append(radio,label)
 radioDiv.style.backgroundColor = "#1a0000"
 radioDiv.style.height = "30px"
+radioDiv.style.width = "150px"
+radioDiv.style.minHeight = "30px"
+radioDiv.style.minWidth = "150px"
 radioDiv.style.padding = "5px"
 radioDiv.style.borderRadius = "10px"
 editDiv.append(inputDiv)
@@ -251,10 +256,8 @@ editDiv.append(radioDiv)
 
 
 
-
-
 /*
-appending all the necessary divs
+appending all the necessary divs for editing and preview
 */
 changeDiv.append(divForButtons)
 changeDiv.append(editDiv)
@@ -264,5 +267,51 @@ previewDiv.append(image)
 outerDiv.append(previewDiv)
 
 
+/*
+creating the clone of preview with button click
+*/
+let cardsDiv = document.createElement("div")
+cardsDiv.style.display = "flex"
+cardsDiv.style.justifyContent = "space-around"
+cardsDiv.style.flexFlow = "row wrap"
+
+/*
+necessary function for the div clone
+*/
+const handleSnapshot = (e) => {
+    let outerCardDiv = document.createElement("div");
+    outerCardDiv.style.position = "relative";
+    let cardDiv = previewDiv.cloneNode(true)
+    cardDiv.style.margin = "50px 10px"
+    cardDiv.style.border = "solid 2px #1a0000"
+    cardDiv.style.borderRadius = "20px"
+    let close = document.createElement("input")
+    close.type = "image"
+    close.src = "assets/images/icon_delete.png"
+    close.style.width = "50px"
+    close.style.position = "absolute";
+    close.style.top = "30px"
+    close.style.left = "-5px"
+    close.onclick = (e) => {
+        e.target.parentElement.remove()
+    }
+    outerCardDiv.append(close)
+    outerCardDiv.append(cardDiv)
+    cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
+}
+
+
+let camBtn = document.createElement("input")
+camBtn.type = "image"
+camBtn.src = "assets/images/camera.png"
+camBtn.onclick = handleSnapshot
+camBtn.style.backgroundColor = "inherit"
+camBtn.style.border = "solid black 2px"
+camBtn.style.borderRadius = "10px"
+camBtn.style.width = "50px"
+camBtn.style.padding = "13px"
+changeDiv.append(camBtn)
+
 
 root.append(outerDiv)
+root.append(cardsDiv)
