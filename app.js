@@ -275,6 +275,7 @@ outerDiv.append(previewDiv)
 creating the clone of preview with button click
 */
 let cardsDiv = document.createElement("div")
+cardsDiv.style.marginTop = "2em"
 cardsDiv.style.display = "flex"
 cardsDiv.style.justifyContent = "space-around"
 cardsDiv.style.flexFlow = "row wrap"
@@ -298,7 +299,9 @@ const handleSnapshot = (e) => {
         close.style.top = "30px"
         close.style.left = "-5px"
         close.onclick = (e) => {
-            flag = ""
+            if(e.target.parentElement === cardsDiv.children[0]){
+                flag = ""
+            }
             e.target.parentElement.remove()
         }
         outerCardDiv.append(close)
@@ -317,6 +320,7 @@ camBtn.style.backgroundColor = "inherit"
 camBtn.style.border = "solid black 2px"
 camBtn.style.borderRadius = "10px"
 camBtn.style.width = "50px"
+camBtn.style.marginTop = "1em"
 camBtn.style.padding = "13px"
 changeDiv.append(camBtn)
 
