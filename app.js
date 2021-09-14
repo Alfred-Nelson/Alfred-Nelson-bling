@@ -46,10 +46,11 @@ aInNav.style.cssText = `
     display : flex;
     justify-content : center;
     text-decoration : none;
-    font-weight : bold;
+    font-weight : 900;
     color : #1a0000;
-    font-size : larger;
+    font-size : 150%;
     margin : 2em;
+    text-shadow : 2px 2px #F39C12; 
 `
 nav.append(aInNav)
 nav.style.marginBottom = "100px"
@@ -308,6 +309,7 @@ const handleSnapshot = (e) => {
         }
         outerCardDiv.append(close)
         outerCardDiv.append(cardDiv)
+        cardDiv.style.boxShadow = "2px 2px 1px 1px dimgrey"
         cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
         flag = e.target
     }
@@ -332,6 +334,7 @@ let footer = document.createElement("footer");
 
 footer.style.display = "flex";
 footer.style.paddingTop = "15%"
+footer.style.flexWrap = "wrap"
 footer.style.bottom = "1em"
 footer.style.marginBottom= "5%"
 footer.style.justifyContent = "center"
@@ -343,17 +346,18 @@ footerElements.forEach((items,index)=>{
     else{
      a = document.createElement("a")
         a.addEventListener('mouseover',(e)=>{
-            e.ta
             e.target.style.borderBottom = "2px solid black"
         })
         a.addEventListener('mouseout',(e)=>{
             e.target.style.borderBottom = "0px"
         })
         a.href = "#"
+        a.target = "_blank"
         a.style.textDecoration = "none"
         a.style.color = "black"
-        a.style.marginLeft = "10px"
+        a.style.marginLeft = "1em"
     }
+    a.style.marginTop = "1em"
     a.innerText = items
     footer.appendChild(a)
 })
