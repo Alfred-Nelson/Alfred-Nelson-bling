@@ -298,6 +298,7 @@ const handleSnapshot = (e) => {
         close.style.top = "30px"
         close.style.left = "-5px"
         close.onclick = (e) => {
+            flag = ""
             e.target.parentElement.remove()
         }
         outerCardDiv.append(close)
