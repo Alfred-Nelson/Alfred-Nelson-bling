@@ -4,7 +4,7 @@ Your code goes in this file
 --------------------------------------------------------------
 */
 let root = document.querySelector("#root");
-root.style.margin = "1em"
+root.style.margin = "0em 5em"
 root.style.fontFamily = "Montserrat"
 
 /*
@@ -52,6 +52,7 @@ aInNav.style.cssText = `
     margin : 2em;
 `
 nav.append(aInNav)
+nav.style.marginBottom = "100px"
 root.append(nav)
 
 
@@ -60,12 +61,22 @@ root.append(nav)
 /*
 necessary functions for the working
 */
+
 let image = document.createElement("img")
 image.src = ""
 const createImage = (e) => {
     if(image.src.slice(-(e.target.value.length)) != e.target.value){
+        image.style.width = "165px"
+        if(e.target.value === "assets/images/radio-02.png"){
+            image.style.marginBottom = "60px"
+        }
+        else if(e.target.value === "assets/images/fall-guy-01.png"){
+            image.style.marginBottom = "25px"
+        }
+        else{
+            image.style.marginBottom = "35px"
+        }
         image.src = e.target.value
-        image.style.width = "200px"
         let temp = document.querySelectorAll("button")
         temp.forEach((button) => {
             button.style.backgroundColor = "inherit"
@@ -90,7 +101,7 @@ an outer div for all editing to go here and the changed image
 const outerDiv = document.createElement("div")
 outerDiv.style.cssText = `
     display : flex;
-    justify-content : center;
+    justify-content : space-around;
 `
 outerDiv.classList.add("outer-div")
 const changeDiv = document.createElement("div")
@@ -101,8 +112,8 @@ previewDiv.style.cssText = `
     display : flex;
     flex-direction : column;
     align-items : center;
-    justify-content : space-around;
-    min-width : 25%;
+    justify-content : space-between;
+    min-width : 300px;
     height : 300px;
 `
 previewDiv.classList.add("preview-div")
@@ -150,11 +161,18 @@ btnName.forEach((name , index) => {
 /*
 adding other editing options
 */
+let editDiv = document.createElement("div")
+editDiv.style.display = "flex"
+editDiv.style.justifyContent = "flex-start"
+editDiv.style.alignItems = "center"
 let inputDiv = document.createElement("div")
 /*
 adding input field
 */
 let valueOnImage = document.createElement("p")
+valueOnImage.style.marginTop = "30px"
+valueOnImage.style.fontSize = "150%"
+valueOnImage.style.fontWeight = "900"
 let input = document.createElement("input")
 input.placeholder = "Name Your Bling!"
 input.value = ""
@@ -198,6 +216,38 @@ inputDiv.append(select)
 /*
 adding Blob Radio
 */
+let radioDiv = document.createElement("form")
+let radio = document.createElement("input")
+let label = document.createElement("span")
+radio.type = "radio"
+radio.name = "blob"
+radio.onchange = (e) => {
+    previewDiv.style.backgroundImage = `url("assets/images/blob.png")`
+    previewDiv.style.backgroundSize = "100%"
+    previewDiv.style.backgroundPosition = "0px 40px"
+}
+label.innerText = "Blob"
+label.style.color = "white"
+label.style.fontSize = "14px"
+radioDiv.append(radio,label)
+radio = document.createElement("input")
+label = document.createElement("span")
+radio.type = "radio"
+radio.name = "blob"
+radio.onchange = (e) => {
+    previewDiv.style.backgroundImage = ``
+    previewDiv.style.backgroundSize = "100%"
+}
+label.innerText = "None"
+label.style.color = "white"
+label.style.fontSize = "14px"
+radioDiv.append(radio,label)
+radioDiv.style.backgroundColor = "#1a0000"
+radioDiv.style.height = "30px"
+radioDiv.style.padding = "5px"
+radioDiv.style.borderRadius = "10px"
+editDiv.append(inputDiv)
+editDiv.append(radioDiv)
 
 
 
@@ -207,7 +257,7 @@ adding Blob Radio
 appending all the necessary divs
 */
 changeDiv.append(divForButtons)
-changeDiv.append(inputDiv)
+changeDiv.append(editDiv)
 outerDiv.append(changeDiv)
 previewDiv.append(valueOnImage)
 previewDiv.append(image)
