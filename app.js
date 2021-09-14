@@ -32,7 +32,7 @@ const imageNames = [
     "assets/images/fall-guy-01.png" , 
     "assets/images/radio-02.png"
   ]
-
+let footerElements =["🖤 Credits :","Polaroid","TV","Traitor","Fall Guy","Radio"]
 
 
 /*
@@ -241,10 +241,12 @@ label = document.createElement("span")
 radio.type = "radio"
 radio.name = "blob"
 radio.onchange = (e) => {
+    flag = ""
     previewDiv.style.backgroundImage = ``
     previewDiv.style.backgroundSize = "100%"
 }
 label.innerText = "None"
+radio.checked = true
 label.style.color = "white"
 label.style.fontSize = "14px"
 radioDiv.append(radio,label)
@@ -324,6 +326,40 @@ camBtn.style.marginTop = "1em"
 camBtn.style.padding = "13px"
 changeDiv.append(camBtn)
 
+let footer = document.createElement("footer");
+
+/*footer.innerText = "🖤 Credits : Polaroid TV Traitor Fall Guy Radio";*/
+
+footer.style.display = "flex";
+footer.style.paddingTop = "15%"
+footer.style.bottom = "1em"
+footer.style.marginBottom= "5%"
+footer.style.justifyContent = "center"
+let a
+footerElements.forEach((items,index)=>{
+    if(index == 0){
+     a = document.createElement("p")
+    }
+    else{
+     a = document.createElement("a")
+        a.addEventListener('mouseover',(e)=>{
+            e.ta
+            e.target.style.borderBottom = "2px solid black"
+        })
+        a.addEventListener('mouseout',(e)=>{
+            e.target.style.borderBottom = "0px"
+        })
+        a.href = "#"
+        a.style.textDecoration = "none"
+        a.style.color = "black"
+        a.style.marginLeft = "10px"
+    }
+    a.innerText = items
+    footer.appendChild(a)
+})
+
+
 
 root.append(outerDiv)
 root.append(cardsDiv)
+root.append(footer)
