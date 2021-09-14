@@ -61,10 +61,11 @@ root.append(nav)
 /*
 necessary function for the image selection
 */
-
+let flag = ""
 let image = document.createElement("img")
 image.src = ""
 const createImage = (e) => {
+    flag = ""
     if(image.src.slice(-(e.target.value.length)) != e.target.value){
         image.style.width = "165px"
         if(e.target.value === "assets/images/radio-02.png"){
@@ -179,6 +180,7 @@ let input = document.createElement("input")
 input.placeholder = "Name Your Bling!"
 input.value = ""
 input.onchange = (e) => {
+    flag = ""
     valueOnImage.innerText = e.target.value
 }
 input.style.cssText = `
@@ -210,6 +212,7 @@ colors.forEach((color) => {
     select.append(options)
 })
 select.onchange = (e) => {
+    flag = ""
     previewDiv.style.backgroundColor = e.target.value
 }
 inputDiv.append(select)
@@ -224,6 +227,7 @@ let label = document.createElement("span")
 radio.type = "radio"
 radio.name = "blob"
 radio.onchange = (e) => {
+    flag = ""
     previewDiv.style.backgroundImage = `url("assets/images/blob.png")`
     previewDiv.style.backgroundSize = "100%"
     previewDiv.style.backgroundPosition = "0px 35px"
@@ -279,25 +283,28 @@ cardsDiv.style.flexFlow = "row wrap"
 necessary function for the div clone
 */
 const handleSnapshot = (e) => {
-    let outerCardDiv = document.createElement("div");
-    outerCardDiv.style.position = "relative";
-    let cardDiv = previewDiv.cloneNode(true)
-    cardDiv.style.margin = "50px 10px"
-    cardDiv.style.border = "solid 2px #1a0000"
-    cardDiv.style.borderRadius = "20px"
-    let close = document.createElement("input")
-    close.type = "image"
-    close.src = "assets/images/icon_delete.png"
-    close.style.width = "50px"
-    close.style.position = "absolute";
-    close.style.top = "30px"
-    close.style.left = "-5px"
-    close.onclick = (e) => {
-        e.target.parentElement.remove()
+    if(flag != e.target){
+        let outerCardDiv = document.createElement("div");
+        outerCardDiv.style.position = "relative";
+        let cardDiv = previewDiv.cloneNode(true)
+        cardDiv.style.margin = "50px 10px"
+        cardDiv.style.border = "solid 2px #1a0000"
+        cardDiv.style.borderRadius = "20px"
+        let close = document.createElement("input")
+        close.type = "image"
+        close.src = "assets/images/icon_delete.png"
+        close.style.width = "50px"
+        close.style.position = "absolute";
+        close.style.top = "30px"
+        close.style.left = "-5px"
+        close.onclick = (e) => {
+            e.target.parentElement.remove()
+        }
+        outerCardDiv.append(close)
+        outerCardDiv.append(cardDiv)
+        cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
+        flag = e.target
     }
-    outerCardDiv.append(close)
-    outerCardDiv.append(cardDiv)
-    cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
 }
 
 
