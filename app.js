@@ -53,7 +53,7 @@ aInNav.style.cssText = `
     text-decoration : none;
     font-weight : 900;
     color : #1a0000;
-    font-size : 150%;
+    font-size : 2rem;
     margin : 2em;
     text-shadow : 2px 2px #F39C12; 
 `
@@ -69,7 +69,6 @@ root.append(nav)
 necessary function for the image selection
 --------------------------------------------------------------
 */
-let flag = ""
 let imageDiv = document.createElement("div")
 let image = document.createElement("img")
 imageDiv.style.width = "100%"
@@ -82,7 +81,6 @@ imageDiv.style.height = "auto"
 imageDiv.append(image)
 image.src = ""
 const createImage = (e) => {
-    flag = ""
     if(image.src.slice(-(e.target.value.length)) != e.target.value){
         image.style.width = "140px"
         if(e.target.value === "assets/images/radio-02.png"){
@@ -208,7 +206,6 @@ let input = document.createElement("input")
 input.placeholder = "Name Your Bling!"
 input.value = ""
 input.addEventListener("keyup",(e) => {
-    flag = ""
     valueOnImage.innerText = e.target.value
 })
 input.style.cssText = `
@@ -241,7 +238,6 @@ colors.forEach((color) => {
     select.append(options)
 })
 select.onchange = (e) => {
-    flag = ""
     document.body.style.backgroundColor = e.target.value
     previewDiv.style.backgroundColor = e.target.value
 }
@@ -259,7 +255,6 @@ radio.type = "radio"
 radio.name = "blob"
 radio.style.cursor = "pointer"
 radio.onchange = (e) => {
-    flag = ""
     imageDiv.style.backgroundImage = `url("assets/images/blob.png")`
     imageDiv.style.backgroundSize = "80%"
     imageDiv.style.backgroundRepeat = "no-repeat"
@@ -275,7 +270,6 @@ radio.type = "radio"
 radio.name = "blob"
 radio.style.cursor = "pointer"
 radio.onchange = (e) => {
-    flag = ""
     imageDiv.style.backgroundImage = ``
     imageDiv.style.backgroundSize = "100%"
 }
@@ -325,32 +319,26 @@ necessary function for the div clone
 --------------------------------------------------------------
 */
 const handleSnapshot = (e) => {
-    if(flag != e.target){
-        let outerCardDiv = document.createElement("div");
-        outerCardDiv.style.position = "relative";
-        let cardDiv = previewDiv.cloneNode(true)
-        cardDiv.style.margin = "50px 10px"
-        cardDiv.style.border = "solid 2px #1a0000"
-        cardDiv.style.borderRadius = "20px"
-        let close = document.createElement("input")
-        close.type = "image"
-        close.src = "assets/images/icon_delete.png"
-        close.style.width = "50px"
-        close.style.position = "absolute";
-        close.style.top = "30px"
-        close.style.left = "-5px"
-        close.onclick = (e) => {
-            if(e.target.parentElement === cardsDiv.children[0]){
-                flag = ""
-            }
-            e.target.parentElement.remove()
-        }
-        outerCardDiv.append(close)
-        outerCardDiv.append(cardDiv)
-        cardDiv.style.boxShadow = "2px 2px 1px 1px dimgrey"
-        cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
-        flag = e.target
+    let outerCardDiv = document.createElement("div");
+    outerCardDiv.style.position = "relative";
+    let cardDiv = previewDiv.cloneNode(true)
+    cardDiv.style.margin = "50px 10px"
+    cardDiv.style.border = "solid 2px #1a0000"
+    cardDiv.style.borderRadius = "px"
+    let close = document.createElement("input")
+    close.type = "image"
+    close.src = "assets/images/icon_delete.png"
+    close.style.width = "50px"
+    close.style.position = "absolute";
+    close.style.top = "30px"
+    close.style.left = "285px"
+    close.onclick = (e) => {
+        e.target.parentElement.remove()
     }
+    outerCardDiv.append(close)
+    outerCardDiv.append(cardDiv)
+    cardDiv.style.boxShadow = "2px 2px 1px 1px dimgrey"
+    cardsDiv.insertBefore(outerCardDiv,cardsDiv.children[0])
 }
 
 
@@ -405,6 +393,7 @@ footerElements.forEach((items,index)=>{
         a.style.marginLeft = "1em"
     }
     a.style.marginTop = "1em"
+    a.style.paddingBottom = "10px"
     a.innerText = items
     footer.appendChild(a)
 })
