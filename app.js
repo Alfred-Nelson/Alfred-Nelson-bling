@@ -81,11 +81,11 @@ imageDiv.style.alignItems = "center"
 imageDiv.style.height = "auto"
 imageDiv.append(image)
 image.src = ""
+image.style.marginTop = "30px"
 const createImage = (e) => {
     if(image.src.slice(-(e.target.value.length)) != e.target.value){
         image.style.width = "140px"
         if(e.target.value === "assets/images/radio-02.png"){
-            image.style.marginTop = "30px"
             image.style.marginBottom = "30px"
         }
         else if(e.target.value === "assets/images/fall-guy-01.png"){
